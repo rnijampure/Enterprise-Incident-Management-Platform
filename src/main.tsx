@@ -13,7 +13,6 @@ import {
 import LoginForm from "./features/auth/LoginForm";
 import PrivateRoute from "./features/auth/routing/PrivateRoute";
 import Layout from "./component/layout/layout";
-
 // // Fonts - These are fine, but ensure ThemeProvider uses 'swap'
 // import "@fontsource/inter/400.css";
 // import "@fontsource/inter/500.css";

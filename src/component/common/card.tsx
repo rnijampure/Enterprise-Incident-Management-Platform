@@ -1,24 +1,46 @@
+//incident-management\src\component\common\card.tsx
 import { CardContent, Typography, CardActions, Button } from "@mui/material";
 import React from "react";
 import { theme } from "../../theme";
-type CardProps = {
-  card: any;
+export type CardData = {
+  title: string;
+  value?: number;
 };
 
-const CardComponent = ({ card }: CardProps) => {
+const CardComponent = ({ card }: { card: CardData }) => {
+  const { title, value } = card;
+  const setBorderRadius = (title: String) => {
+    switch (title) {
+      case "Total":
+        return "blue";
+      case "Open":
+        return "orange";
+      case "Resolved":
+        return "green";
+      default:
+        return "black";
+    }
+  };
+
   return (
     <React.Fragment>
       <CardContent
         sx={{
           boxShadow: theme.customShadows.elevated,
           borderRadius: 2,
-          maxWidth: 350,
-          minWidth: 350,
-          mb: 2,
+          maxWidth: "30%",
+          minWidth: 150,
+          mb: 0,
           display: "flex",
           flexDirection: "column",
-          gap: 2,
+          gap: 0,
           spacing: 6,
+          padding: 0,
+          paddingLeft: "5px",
+          paddingTop: "5px",
+          maxHeight: "max-content",
+          "&:last-child": { paddingBottom: 0 },
+          borderLeft: `3px solid ${setBorderRadius(title)} `,
           // Responsive adjustments
           [theme.breakpoints.down("md")]: {
             maxWidth: "100%", // full width on small screens
@@ -26,23 +48,22 @@ const CardComponent = ({ card }: CardProps) => {
           },
         }}
       >
-        <Typography gutterBottom sx={{ color: "text.secondary", fontSize: 14 }}>
-          Word of the Day
+        <Typography
+          sx={{
+            color: "text.secondary",
+            mb: 0,
+            whiteSpace: "wrap",
+            paddingLeft: "5px",
+            marginTop: "0px",
+            "&:last-child": { paddingBottom: 0 },
+          }}
+        >
+          {title}:{" "}
+          <b style={{ color: `${setBorderRadius(title)}`, marginLeft: "5px" }}>
+            {" "}
+            {value}{" "}
+          </b>
         </Typography>
-        <Typography variant="h5" component="div">
-          {card.title}
-        </Typography>
-        <Typography sx={{ color: "text.secondary", mb: 1.5 }}>
-          adjective
-        </Typography>
-        <Typography variant="body2">
-          well meaning and kindly.
-          <br />
-          {'"a benevolent smile"'}
-        </Typography>
-        <CardActions>
-          <Button size="small">Learn More</Button>
-        </CardActions>
       </CardContent>
     </React.Fragment>
   );

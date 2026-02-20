@@ -1,5 +1,6 @@
+//incident-management\src\features\dashboard\Dashboard.tsx
 import React from "react";
-import Layout from "../summary/layout";
+import Layout from "./layout";
 
 const Dashboard = () => {
   return (

@@ -14,7 +14,7 @@ const Layout = () => {
 
       <Box
         component="main"
-        sx={{ flexGrow: 1, width: "100%", overflowY: "auto" }}
+        sx={{ flexGrow: 1, width: "100%", overflow: "visible" }}
       >
         {/* Suspense here ensures that only the main content area shows a loader, 
             keeping the NavBar visible and interactive. */}

@@ -1,5 +1,9 @@
-import { createTheme } from "@mui/material/styles";
-import { red } from "@mui/material/colors";
+import { createTheme, alpha } from "@mui/material/styles";
+import { type IncidentSeverity } from "../types/types";
+
+/* =========================================================
+   1️⃣  Theme Augmentation
+========================================================= */
 
 declare module "@mui/material/styles" {
   interface Theme {
@@ -9,6 +13,7 @@ declare module "@mui/material/styles" {
       button: string;
     };
   }
+
   interface ThemeOptions {
     customShadows?: {
       card: string;
@@ -16,64 +21,141 @@ declare module "@mui/material/styles" {
       button: string;
     };
   }
+
+  interface Palette {
+    severity: Record<IncidentSeverity, string>;
+  }
+
+  interface PaletteOptions {
+    severity?: Record<IncidentSeverity, string>;
+  }
 }
 
-const commonThemeOptions = {
-  // ... your other options
-  components: {
-    MuiCssBaseline: {
-      styleOverrides: {
-        "@font-face": {
-          fontFamily: "Inter",
-          fontDisplay: "swap", // This allows the system font to show first
+/* =========================================================
+   2️⃣  Reusable Shadows
+========================================================= */
+
+const customShadows = {
+  card: "0px 4px 12px rgba(0, 0, 0, 0.1)",
+  elevated: "0px 4px 12px rgba(0, 0, 0, 0.3)",
+  button: "0px 2px 6px rgba(0,0,0,0.08)",
+};
+
+/* =========================================================
+   3️⃣  Common Component Overrides
+========================================================= */
+
+const commonComponents = {
+  MuiCssBaseline: {
+    styleOverrides: {
+      body: {
+        textRendering: "optimizeLegibility",
+      },
+      "@font-face": {
+        fontFamily: "Inter",
+        fontDisplay: "swap",
+      },
+    },
+  },
+
+  MuiCardContent: {
+    styleOverrides: {
+      root: {
+        "&:last-child": {
+          paddingBottom: 0,
         },
       },
     },
-    // ... rest of your components
   },
 };
-// Define reusable box shadows here
-const customShadows = {
-  card: "0px 4px 12px rgba(0, 0, 0, 0.1)", // example for cards
-  elevated: "0px 4px 12px rgba(0, 0, 0, 0.3)", // more prominent shadow
-  button: "0px 2px 6px rgba(0,0,0,0.08)", // subtle shadow for buttons
+
+/* =========================================================
+   4️⃣  Color Palette
+========================================================= */
+
+// Map your custom palette
+const PALETTE = {
+  moltenLava: "#780000", // Critical / Error
+  flagRed: "#c1121f", // High / Warning
+  papayaWhip: "#fdf0d5", // Light background / paper
+  deepSpaceBlue: "#003049", // Primary / medium
+  steelBlue: "#669bbc", // Secondary / low
 };
+
+/* =========================================================
+   5️⃣  Create Theme
+========================================================= */
+
 export const theme = createTheme({
-  ...commonThemeOptions,
-  colorSchemes: {
-    light: {
-      palette: {
-        mode: "light",
-        primary: { main: "#5e60ce" },
-        secondary: { main: "#00b4d8" },
-        error: { main: red.A400 },
-        background: { default: "#f4f6f8", paper: "#ffffff" },
-        text: { primary: "#1f2937", secondary: "#4b5563" },
-      },
-    },
-    dark: {
-      palette: {
-        mode: "dark",
-        primary: { main: "#5e60ce" },
-        secondary: { main: "#00b4d8" },
-        error: { main: red.A400 },
-        background: { default: "#1e1e2f", paper: "#2c2c3e" },
-        text: { primary: "#e0e0e0", secondary: "#a0a0a0" },
-      },
-    },
-  },
+  customShadows,
 
   typography: {
     fontFamily: '"Inter Variable", "Inter", sans-serif',
   },
-  customShadows: customShadows,
-  components: {
-    MuiCssBaseline: {
-      styleOverrides: {
-        body: {
-          textRendering: "optimizeLegibility",
+
+  colorSchemes: {
+    light: {
+      palette: {
+        mode: "light",
+
+        primary: { main: PALETTE.deepSpaceBlue },
+        secondary: { main: PALETTE.steelBlue },
+
+        success: { main: PALETTE.steelBlue, contrastText: "#fff" },
+        info: { main: PALETTE.deepSpaceBlue, contrastText: "#fff" },
+        warning: { main: PALETTE.flagRed, contrastText: "#fff" },
+        error: { main: PALETTE.moltenLava, contrastText: "#fff" },
+
+        severity: {
+          critical: PALETTE.moltenLava,
+          high: PALETTE.flagRed,
+          medium: PALETTE.deepSpaceBlue,
+          low: PALETTE.steelBlue,
+        },
+
+        background: {
+          default: PALETTE.papayaWhip,
+          paper: PALETTE.papayaWhip,
+        },
+
+        text: {
+          primary: PALETTE.deepSpaceBlue,
+          secondary: PALETTE.steelBlue,
+        },
+      },
+    },
+
+    dark: {
+      palette: {
+        mode: "dark",
+
+        primary: { main: PALETTE.deepSpaceBlue },
+        secondary: { main: PALETTE.steelBlue },
+
+        success: { main: PALETTE.steelBlue, contrastText: "#fff" },
+        info: { main: PALETTE.deepSpaceBlue, contrastText: "#fff" },
+        warning: { main: PALETTE.flagRed, contrastText: "#fff" },
+        error: { main: PALETTE.moltenLava, contrastText: "#fff" },
+
+        severity: {
+          critical: PALETTE.moltenLava,
+          high: PALETTE.flagRed,
+          medium: PALETTE.deepSpaceBlue,
+          low: PALETTE.steelBlue,
+        },
+
+        background: {
+          default: "#001524", // Dark variant of Deep Space Blue
+          paper: "#00263d",
+        },
+
+        text: {
+          primary: "#fdf0d5", // Papaya Whip
+          secondary: PALETTE.steelBlue,
         },
       },
     },
   },
+
+  components: commonComponents,
 });

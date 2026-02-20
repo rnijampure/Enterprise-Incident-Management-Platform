@@ -1,10 +1,24 @@
+// src/app/store/store.ts
 import { configureStore } from "@reduxjs/toolkit";
+import authReducer from "../../features/auth/slice/authSlice";
+import { incidentApi } from "../../features/incident/api/incidentApi";
+import { setupListeners } from "@reduxjs/toolkit/query/react";
 
+import aiReducer from "../../features/AI/slice/aiSlice";
+//../features/AI/slice/aiSlice
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    auth: authReducer,
+    ai: aiReducer,
+    [incidentApi.reducerPath]: incidentApi.reducer,
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(incidentApi.middleware),
 });
 
-// Infer the `RootState` and `AppDispatch` types from the store itself
+// Types for TypeScript
 export type RootState = ReturnType<typeof store.getState>;
-// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppDispatch = typeof store.dispatch;
+
+// Enables refetchOnFocus / refetchOnReconnect
+setupListeners(store.dispatch);

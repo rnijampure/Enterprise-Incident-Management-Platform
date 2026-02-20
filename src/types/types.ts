@@ -1,5 +1,4 @@
-export type Severity = "low" | "medium" | "high" | "critical";
-export type Status =
+export type IncidentStatus =
   | "open"
   | "in_progress"
   | "resolved"
@@ -8,6 +7,7 @@ export type Status =
   | "invalid"
   | "obsolete"
   | "escalated_team";
+
 export type IncidentType =
   | "network"
   | "hardware"
@@ -15,6 +15,7 @@ export type IncidentType =
   | "security"
   | "external"
   | "other";
+export type IncidentSeverity = "low" | "medium" | "high" | "critical";
 
 export type IncidentCategory =
   | "performance"
@@ -22,6 +23,7 @@ export type IncidentCategory =
   | "security breach"
   | "data loss"
   | "other";
+export type EscalationLevel = "team" | "department" | "external support";
 
 export interface User {
   id: string;
@@ -33,12 +35,11 @@ export interface User {
 }
 
 export interface Incident {
-  id: string;
-  ticketNumber: string; // e.g., "INC-2024-001"
+  _id: string; // MongoDB document id
+  ticketId: string;
   title: string;
   description: string;
-  status: Status;
-  severity: Severity;
+  id: string;
   type: IncidentType;
   category: IncidentCategory;
 
@@ -49,19 +50,29 @@ export interface Incident {
   departmentId: string;
 
   // Escalation & Metrics
-  escalationLevel: 1 | 2 | 3; // 1: Team, 2: Dept, 3: External
-  createdAt: string; // ISO Date
-  updatedAt: string;
   resolvedAt?: string;
 
   // Metadata for filtering
   region: string;
   tags: string[];
+
+  status: IncidentStatus;
+  severity: IncidentSeverity;
+
+  assignee?: string; // ObjectId becomes string in frontend
+  reporter: string; // ObjectId becomes string in frontend
+
+  department: string;
+
+  escalationLevel: EscalationLevel;
+
+  createdAt: string; // ISO string from backend
+  updatedAt: string; // ISO string from backend
 }
 
 export interface IncidentFilters {
-  status: Status[];
-  severity: Severity[];
+  status: IncidentStatus[];
+  severity: IncidentSeverity[];
   assigneeId: string | null;
   teamId: string | null;
   region: string | null;
@@ -70,6 +81,12 @@ export interface IncidentFilters {
     end: string;
   };
   searchTerm: string;
+}
+export interface IncidentUIState {
+  selectedIncidentId: string | null;
+  statusFilter: string;
+  severityFilter: string;
+  isCreateModalOpen: boolean;
 }
 /* 
 const UserSchema = new Schema({
