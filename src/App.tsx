@@ -7,7 +7,7 @@ import Box from "@mui/material/Box";
 // Lazy load your features to fix that LCP/TBT issue
 const Dashboard = lazy(() => import("./features/dashboard/Dashboard"));
 //const Incidents = lazy(() => import("./features/incidents/IncidentsList"));
-
+import { useGetLookupsQuery } from "./features/lookups/api/lookupApi";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -49,5 +49,6 @@ function LoadingScreen() {
 }
 
 export default function App() {
+  useGetLookupsQuery();
   return <RouterProvider router={router} />;
 }

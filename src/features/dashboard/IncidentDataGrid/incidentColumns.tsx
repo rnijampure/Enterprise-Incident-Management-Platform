@@ -4,7 +4,7 @@ import { type Incident } from "./types"; // Adjust path as needed
 import { Button } from "@mui/material";
 import { Edit as EditIcon } from "@mui/icons-material";
 
-export const incidentColumns: GridColDef<Incident>[] = [
+export const incidentColumns = (navigate: (path: string) => void) => [
   {
     field: "actions",
     headerName: "Actions",
@@ -14,7 +14,7 @@ export const incidentColumns: GridColDef<Incident>[] = [
       const handleEditClick = (e: React.MouseEvent) => {
         e.stopPropagation(); // important
         console.log("Row data:", params.row); // now defined
-        // navigate(`/incidents/${params.row._id}`);
+        navigate(`/incidentDetails/${params.row._id}`);
       };
 
       return (
@@ -30,7 +30,7 @@ export const incidentColumns: GridColDef<Incident>[] = [
     headerName: "Ticket ID",
     width: 120,
     // Makes the ID stand out
-    renderCell: (params) => `**${params.value}**`,
+    renderCell: (params: any) => `**${params.value}**`,
   },
 
   {
@@ -54,7 +54,7 @@ export const incidentColumns: GridColDef<Incident>[] = [
     headerName: "Assignee",
     width: 160,
     // In v8, valueGetter receives (value, row)
-    valueGetter: (_value, row) => row.assignee?.name ?? "Unassigned",
+    valueGetter: (_value: any, row: any) => row.assignee?.name ?? "Unassigned",
   },
   {
     field: "department",
@@ -71,7 +71,7 @@ export const incidentColumns: GridColDef<Incident>[] = [
     headerName: "Created",
     width: 160,
     // In v8, valueFormatter receives only the value (not the whole params object)
-    valueFormatter: (value) =>
+    valueFormatter: (value: any) =>
       value ? new Date(value as string).toLocaleDateString() : "",
   },
 
@@ -80,7 +80,7 @@ export const incidentColumns: GridColDef<Incident>[] = [
     headerName: "updated",
     width: 160,
     // In v8, valueFormatter receives only the value (not the whole params object)
-    valueFormatter: (value) =>
+    valueFormatter: (value: any) =>
       value ? new Date(value as string).toLocaleDateString() : "",
   },
 ];

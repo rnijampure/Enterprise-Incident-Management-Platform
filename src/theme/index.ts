@@ -58,6 +58,16 @@ const commonComponents = {
     },
   },
 
+  MuiFormHelperText: {
+    styleOverrides: {
+      root: {
+        color: "#9E9E9E", // default helper text color
+        "&.Mui-error": {
+          color: "#c1121f", // error color
+        },
+      },
+    },
+  },
   MuiCardContent: {
     styleOverrides: {
       root: {

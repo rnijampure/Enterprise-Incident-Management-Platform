@@ -21,7 +21,7 @@ export default function IncidentDataGrid({ incidents }: any) {
     <Box sx={{ height: 400, width: "100%" }}>
       <DataGrid
         rows={incidents}
-        columns={incidentColumns}
+        columns={incidentColumns(navigate)}
         // onRowDoubleClick={handleRowDoubleClick} // ✅ attach here
         getRowId={(row) => row._id} // The magic line
         initialState={{

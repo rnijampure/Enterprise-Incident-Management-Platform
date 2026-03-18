@@ -20,6 +20,7 @@ import Layout from "./component/layout/layout";
 // import "@fontsource/inter/700.css";
 import "@fontsource-variable/inter/index.css";
 import ErrorBoundary from "./component/common/ErrorBoundary";
+import IncidentDetailsPage from "./features/incident/pages/IncidentDetailsPage";
 
 // Lazy load the Dashboard to shrink the initial JS bundle
 const Dashboard = lazy(() => import("./features/dashboard/Dashboard"));
@@ -42,6 +43,14 @@ const router = createBrowserRouter([
         element: (
           <Suspense fallback={<div>Loading...</div>}>
             <Dashboard />
+          </Suspense>
+        ),
+      },
+      {
+        path: "incidentDetails/:id",
+        element: (
+          <Suspense fallback={<div>Loading...</div>}>
+            <IncidentDetailsPage />
           </Suspense>
         ),
       },

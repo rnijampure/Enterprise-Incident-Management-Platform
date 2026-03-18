@@ -8,6 +8,20 @@ export type IncidentStatus =
   | "obsolete"
   | "escalated_team";
 
+export type Team = {
+  _id: string;
+  name: string;
+  departmentId: string;
+};
+export type Region = {
+  _id: string;
+  name: string;
+};
+export type Department = {
+  _id: string;
+  name: string;
+  regionId: string;
+};
 export type IncidentType =
   | "network"
   | "hardware"
@@ -32,8 +46,35 @@ export interface User {
   role: "engineer" | "manager" | "admin";
   teamId: string;
   region: string;
+  team?: string;
+  department?: string;
+  createAt?: string;
 }
+export interface UserBase {
+  _id: string;
+  name: string;
+  email: string;
+}
+export interface IncidentUpdate {
+  _id: string;
+  incidentId: string;
+  /** * userId can be a string (ID) or a populated object.
+   * In a strict production environment, we often use 'string | IncidentUser'
+   */
+  userId: string | User;
 
+  // Using a Union type here prevents typos in your code logic
+  fieldChanged: "status" | "severity" | "assignee" | "title" | "description";
+
+  // oldValue and newValue are usually strings, but can be numbers or null
+  oldValue: string | number | null;
+  newValue: string | number | null;
+
+  createdAt: string; // ISO Date String
+  __v: number;
+}
+export type Assignee = UserBase & User;
+export type Reporter = UserBase;
 export interface Incident {
   _id: string; // MongoDB document id
   ticketId: string;
@@ -59,8 +100,8 @@ export interface Incident {
   status: IncidentStatus;
   severity: IncidentSeverity;
 
-  assignee?: string; // ObjectId becomes string in frontend
-  reporter: string; // ObjectId becomes string in frontend
+  assignee?: Assignee; // ObjectId becomes string in frontend
+  reporter: Reporter; // ObjectId becomes string in frontend
 
   department: string;
 
@@ -69,7 +110,6 @@ export interface Incident {
   createdAt: string; // ISO string from backend
   updatedAt: string; // ISO string from backend
 }
-
 export interface IncidentFilters {
   status: IncidentStatus[];
   severity: IncidentSeverity[];
