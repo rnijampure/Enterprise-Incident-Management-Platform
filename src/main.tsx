@@ -21,6 +21,8 @@ import Layout from "./component/layout/layout";
 import "@fontsource-variable/inter/index.css";
 import ErrorBoundary from "./component/common/ErrorBoundary";
 import IncidentDetailsPage from "./features/incident/pages/IncidentDetailsPage";
+import { SessionObserver } from "./features/auth/SessionObserver";
+import { SessionPopup } from "./features/auth/SessionPopup";
 
 // Lazy load the Dashboard to shrink the initial JS bundle
 const Dashboard = lazy(() => import("./features/dashboard/Dashboard"));
@@ -67,9 +69,25 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <ErrorBoundary>
       <Provider store={store}>
         <AppThemeProvider>
-          <RouterProvider router={router} />
+          {/* 1. Wrap the app to handle initial session check */}
+          <SessionObserver>
+            <RouterProvider router={router} />
+            {/* 2. Global Popup for 401 Session Expired events */}
+            <SessionPopup />
+          </SessionObserver>
         </AppThemeProvider>
       </Provider>
     </ErrorBoundary>
   </React.StrictMode>,
 );
+{
+  /* <React.StrictMode>
+    <ErrorBoundary>
+      <Provider store={store}>
+        <AppThemeProvider>
+          <RouterProvider router={router} />
+        </AppThemeProvider>
+      </Provider>
+    </ErrorBoundary>
+  </React.StrictMode>, */
+}
