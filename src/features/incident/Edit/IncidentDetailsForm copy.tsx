@@ -31,11 +31,6 @@ const severityOptions = ["low", "medium", "high", "critical"];
 const statusOptions = ["open", "in-progress", "resolved", "obsolete"];
 const typeOptions = ["security", "availability", "performance", "other"];
 const categoryOptions = ["performance", "security", "infrastructure", "other"];
-const escalationOptions = ["department", "team", "organization"];
-
-interface IncidentDetailsFormProps {
-  defaultData: Incident;
-}
 
 export function IncidentDetailsForm(defaultData: Incident) {
   const { data: incident, isLoading } = useGetIncidentByIdQuery(

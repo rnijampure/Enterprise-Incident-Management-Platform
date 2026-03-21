@@ -1,8 +1,7 @@
 import Paper from "@mui/material/Paper";
-import { lazy, Suspense, useMemo, useState } from "react";
+import { lazy, Suspense } from "react";
 import { useGetIncidentsQuery } from "../incident/api/incidentApi";
 import Grid from "@mui/material/Grid";
-import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 
 // Lazy load components
@@ -31,13 +30,6 @@ const loader = (
     ...Loading
   </Box>
 );
-
-const Item = styled(Box)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2332" : "#fff",
-  padding: theme.spacing(2),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
 
 const Layout = () => {
   const { data } = useGetIncidentsQuery({});

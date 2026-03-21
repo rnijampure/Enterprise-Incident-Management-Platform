@@ -58,7 +58,7 @@ export default function App() {
   //const { isLoggedIn, accessToken } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.auth.user);
-  const { isLoggedIn, accessToken } = useAppSelector((state) => state.auth);
+  const { accessToken } = useAppSelector((state) => state.auth);
   const [initializing, setInitializing] = useState(true);
 
   useEffect(() => {

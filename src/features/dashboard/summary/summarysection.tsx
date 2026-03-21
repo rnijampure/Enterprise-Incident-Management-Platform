@@ -40,7 +40,7 @@ const SummarySection: React.FC = () => {
         justifyContent: "flex-end",
       }}
     >
-      {displayCards.map((card, index) => (
+      {displayCards.map((card) => (
         <>
           {/* Check for BOTH isLoading OR a missing card object */}
           {isLoading || !card ? (

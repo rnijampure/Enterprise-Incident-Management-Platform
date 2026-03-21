@@ -1,5 +1,5 @@
 //incident-management\src\component\common\card.tsx
-import { CardContent, Typography, CardActions, Button } from "@mui/material";
+import { CardContent, Typography } from "@mui/material";
 import React from "react";
 import { theme } from "../../theme";
 export type CardData = {

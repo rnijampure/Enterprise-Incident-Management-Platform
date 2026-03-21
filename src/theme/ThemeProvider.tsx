@@ -1,6 +1,6 @@
 // src/theme/ThemeProvider.tsx
 
-import { ThemeProvider, type ThemeProviderProps } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import InitColorSchemeScript from "@mui/material/InitColorSchemeScript";
 import { type ReactNode } from "react";

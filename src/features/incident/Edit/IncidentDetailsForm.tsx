@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import FlagIcon from "@mui/icons-material/Flag";
 import SpeedIcon from "@mui/icons-material/Speed";
@@ -24,12 +24,7 @@ import {
   useGetIncidentByIdQuery,
   useUpdateIncidentMutation,
 } from "../api/incidentApi";
-import type {
-  Incident,
-  Region,
-  User,
-  IncidentStatus,
-} from "../../../types/types";
+import type { Incident, Region, IncidentStatus } from "../../../types/types";
 import { useGetLookupsQuery } from "../../lookups/api/lookupApi";
 import UserTooltip from "../../../component/common/popover";
 // = "open" | "resolved" | "obsolete" | "in_progress" | "closed" | "reopened" | "invalid" | "escalated_team"
@@ -138,7 +133,6 @@ export function IncidentDetailsForm(defaultData: Incident) {
   }
 
   // Lookup data
-  const teamOptions = lookups?.teams ?? [];
   const userOptions = lookups?.users ?? [];
   const regionOptions = lookups?.regions ?? [];
 

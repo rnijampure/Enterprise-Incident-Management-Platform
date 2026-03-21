@@ -1,7 +1,6 @@
 // src/components/common/ThemeToggleButton.tsx
 import { IconButton, useTheme, Tooltip } from "@mui/material";
 import { LightMode, DarkMode } from "@mui/icons-material";
-import { useState } from "react";
 
 interface ThemeToggleButtonProps {
   onToggle: () => void;

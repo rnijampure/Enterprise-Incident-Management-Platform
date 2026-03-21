@@ -1,5 +1,5 @@
 // src/component/common/SkeletonCard.tsx
-import { Card, CardContent, Skeleton, CardActions } from "@mui/material";
+import { Card, CardContent, Skeleton } from "@mui/material";
 import React from "react";
 
 const SkeletonCard: React.FC = () => {

@@ -15,8 +15,6 @@ import type { Incident } from "../../../../types/types";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import Stack from "@mui/material/Stack";
-import styled from "@emotion/styled";
-import { useTheme } from "@mui/material";
 
 ChartJS.register(
   CategoryScale,
@@ -34,7 +32,6 @@ type TrendChartProps = {
 type Granularity = "daily" | "weekly" | "fortnightly";
 
 const TrendChart: React.FC<TrendChartProps> = ({ incidents }) => {
-  const theme = useTheme();
   const [granularity, setGranularity] = React.useState<Granularity>("weekly");
 
   const handleGranularityChange = (

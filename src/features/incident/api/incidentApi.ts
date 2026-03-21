@@ -45,21 +45,21 @@ export const incidentApi = createApi({
         body: patch,
       }),
       // This mutation only kills the specific item and the general list
-      invalidatesTags: (result, error, { _id }) => [
+      invalidatesTags: (_result, _error, { _id }) => [
         { type: "Incident", id: _id },
       ],
     }),
     getIncidentById: builder.query<Incident, number | string>({
       query: (id) => `incidents/${id}`,
-      providesTags: (result, error, id) => [{ type: "Incident", id: id }],
+      providesTags: (_result, _error, id) => [{ type: "Incident", id: id }],
     }),
     getIncidentUpdatesById: builder.query<IncidentUpdate[], number | string>({
       query: (id) => `incidents/updates/${id}`,
-      providesTags: (result, error, id) => [{ type: "Incident", id: id }],
+      providesTags: (_result, _error, id) => [{ type: "Incident", id: id }],
     }),
     getIncidentCommentsUpdatesById: builder.query<any[], number | string>({
       query: (id) => `incidents/updates/comments/${id}`,
-      providesTags: (result, error, id) => [{ type: "Incident", id: id }],
+      providesTags: (_result, _error, id) => [{ type: "Incident", id: id }],
     }),
   }),
 });

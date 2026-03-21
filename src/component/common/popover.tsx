@@ -37,7 +37,6 @@ export default function UserTooltip({
     skip: !open, // fetch only when opened
   });
 
-  const positionRef = React.useRef<{ x: number; y: number }>({ x: 0, y: 0 });
   const popperRef = React.useRef<any>(null);
   const areaRef = React.useRef<HTMLDivElement>(null);
 

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { store } from "../../../app/store/store";
-import { setSessionExpiring, logOut } from "../slice/authSlice";
+import { setSessionExpiring } from "../slice/authSlice";
 
 const api = axios.create({
   baseURL: "https://localhost:5000/api",

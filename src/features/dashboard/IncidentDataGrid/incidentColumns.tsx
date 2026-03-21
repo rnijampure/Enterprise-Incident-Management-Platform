@@ -1,7 +1,6 @@
 // incident-management\src\features\dashboard\IncidentDataGrid\incidentColumns.ts
-import { type GridColDef, type GridRenderCellParams } from "@mui/x-data-grid";
+import { type GridRenderCellParams } from "@mui/x-data-grid";
 import { type Incident } from "./types"; // Adjust path as needed
-import { Button } from "@mui/material";
 import { Edit as EditIcon } from "@mui/icons-material";
 
 export const incidentColumns = (navigate: (path: string) => void) => [

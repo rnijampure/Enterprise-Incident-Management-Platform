@@ -7,7 +7,7 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
-} from "react-chartjs-2";
+} from "recharts";
 import type { Incident } from "../../../../types/types";
 
 type DepartmentBarChartProps = {

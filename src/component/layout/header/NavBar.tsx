@@ -1,5 +1,5 @@
 // src/components/layout/NavBar.tsx
-import { AppBar, Toolbar, Typography, Box, useTheme } from "@mui/material";
+import { AppBar, Toolbar, Typography, Box } from "@mui/material";
 import ThemeToggleButton from "../../common/ThemeToggleButton";
 import { useColorScheme } from "@mui/material/styles";
 export default function NavBar() {

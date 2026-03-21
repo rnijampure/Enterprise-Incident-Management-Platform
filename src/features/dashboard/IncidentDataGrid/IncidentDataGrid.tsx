@@ -1,18 +1,11 @@
 import Box from "@mui/material/Box";
-import {
-  DataGrid,
-  type GridCellParams,
-  type GridColDef,
-} from "@mui/x-data-grid";
+import { DataGrid } from "@mui/x-data-grid";
 import { incidentColumns } from "./incidentColumns";
-import { useGetIncidentsQuery } from "../../incident/api/incidentApi";
 import { alpha } from "@mui/material/styles";
 
-import { useTheme, type Theme } from "@emotion/react";
 import { useNavigate } from "react-router-dom";
 
 export default function IncidentDataGrid({ incidents }: any) {
-  const theme = useTheme();
   //  const { data, isLoading } = useGetIncidentsQuery({});
   console.log("GRID DATA", incidents);
   const navigate = useNavigate();

@@ -1,5 +1,3 @@
-import React from "react";
-
 const FooterItem = () => {
   return <div style={{ padding: "10px", textAlign: "center" }}>FooterItem</div>;
 };
