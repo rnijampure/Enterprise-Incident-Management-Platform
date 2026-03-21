@@ -2,8 +2,10 @@ import axios from "axios";
 import { store } from "../../../app/store/store";
 import { setSessionExpiring } from "../slice/authSlice";
 
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL || "https://localhost:5000/api";
 const api = axios.create({
-  baseURL: "https://localhost:5000/api",
+  baseURL: API_BASE_URL,
   withCredentials: true, // Crucial for reading the Refresh Token Cookie
 });
 
