@@ -31,7 +31,7 @@ export default function LoginForm() {
 
     try {
       // 2. Call your HTTPS Backend
-      const response = await api.post("/user/logIn", { email, password });
+      const response = await api.post("/user/login", { email, password });
 
       // 3. Extract real data (User profile + Access Token)
       const { accessToken, user } = response.data;
